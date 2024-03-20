@@ -5,12 +5,19 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace projetTp.Tools
 {
     public static class Builder
     {
+        private static string originPath = Path.GetFullPath("../../../Data");
+        private static string voitureNamePath = @"\VoituresData.json";
+        private static string camionNamePath = @"\CamionsData.json";
+
+        private static string voiturePath = originPath + voitureNamePath;
+        private static string camionPath = originPath + camionNamePath;
         //public static bool contientUnChiffre(this string chaine) { return chaine.Any(char.IsDigit); }
 
         // Creation de Camion et Voiture en les ajoutant à une liste de Véhicule donnée
@@ -535,12 +542,12 @@ namespace projetTp.Tools
                 else
                 {
                     // 1 : Marque
-                    if(keyPressed == ConsoleKey.NumPad1 || keyPressed == ConsoleKey.D1)
+                    if (keyPressed == ConsoleKey.NumPad1 || keyPressed == ConsoleKey.D1)
                     {
                         SearchByMarque(liste);
                     }
                     // 2 : Modele
-                    if(keyPressed == ConsoleKey.NumPad2 || keyPressed == ConsoleKey.D2)
+                    if (keyPressed == ConsoleKey.NumPad2 || keyPressed == ConsoleKey.D2)
                     {
                         SearchByModele(liste);
                     }
@@ -565,7 +572,7 @@ namespace projetTp.Tools
                         SearchByType(liste);
                     }
                 }
-            }while(keyInvalid);
+            } while (keyInvalid);
         }
 
         // Permet de supprimer en fonction de critères choisis
@@ -1041,7 +1048,7 @@ namespace projetTp.Tools
             } while (keyInvalid);
         }
 
-        public static void originMenu(List<Vehicule> liste)
+        public static void OriginMenu(List<Vehicule> liste)
         {
             //Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -1081,7 +1088,7 @@ namespace projetTp.Tools
                 else
                 {
                     // --------- 1 Creation ----------
-                    if(keyPressed == ConsoleKey.NumPad1 || keyPressed == ConsoleKey.D1)
+                    if (keyPressed == ConsoleKey.NumPad1 || keyPressed == ConsoleKey.D1)
                     {
                         Console.WriteLine("Voulez vous créer une 1 : voiture ou un 2 : Camion ?");
                         bool choixInvalid;
@@ -1099,7 +1106,7 @@ namespace projetTp.Tools
                             else
                             {
                                 // 1 : Voiture
-                                if(choixKey == ConsoleKey.NumPad1 || choixKey == ConsoleKey.D1)
+                                if (choixKey == ConsoleKey.NumPad1 || choixKey == ConsoleKey.D1)
                                 {
                                     VoitureCreator(liste);
                                 }
@@ -1109,7 +1116,7 @@ namespace projetTp.Tools
                                     CamionCreator(liste);
                                 }
                             }
-                        }while(choixInvalid);
+                        } while (choixInvalid);
                     }
                     // --------- 2 : Voir Vehicule ---
                     if (keyPressed == ConsoleKey.NumPad2 || keyPressed == ConsoleKey.D2)
@@ -1142,9 +1149,49 @@ namespace projetTp.Tools
                         ReadAll(liste);
                     }
                     // ------ 8 : Sauvegarder -------
+                    if(keyPressed == ConsoleKey.NumPad8 || keyPressed == ConsoleKey.D8)
+                    {
+                        Sauvegarde(liste);
+                    }
                 }
 
             } while (keyInvalid);
         }
+
+        public static void Sauvegarde(List<Vehicule> liste)
+        {
+            var option = new JsonSerializerOptions { WriteIndented = true };
+            // Creation de deux listes pour camion et voiture
+            List<Camion> camionListe = liste.Where(c => c is Camion).Cast<Camion>().ToList();
+            List<Voiture> voitureListe = liste.Where(v => v is Voiture).Cast<Voiture>().ToList();
+
+            if (camionListe.Count > 0)
+            {
+                File.WriteAllText(camionPath,JsonSerializer.Serialize(camionListe,option));
+            }
+            if (voitureListe.Count > 0)
+            {
+                File.WriteAllText(voiturePath, JsonSerializer.Serialize(voitureListe, option));
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Sauvegarde effectué avec succés");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        public static void LoadCamions(List<Vehicule> liste)
+        {
+            List<Camion> camionListe = JsonSerializer.Deserialize<List<Camion>>(File.ReadAllText(camionPath)).ToList();
+            foreach (var item in camionListe)
+            {
+                liste.Add(item);
+            }
+        }
+        public static void LoadVoitures(List<Vehicule> liste)
+        {
+            List<Voiture> camionListe = JsonSerializer.Deserialize<List<Voiture>>(File.ReadAllText(voiturePath)).ToList();
+            foreach (var item in camionListe)
+            {
+                liste.Add(item);
+            }
+        }
     }
-    }
+}

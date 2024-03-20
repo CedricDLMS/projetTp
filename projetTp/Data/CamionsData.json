@@ -1,0 +1,20 @@
+[
+  {
+    "Poids": 55,
+    "Marque": "Camtar",
+    "Modele": "OTU",
+    "Numero": "4567"
+  },
+  {
+    "Poids": 5988,
+    "Marque": "Etude test",
+    "Modele": "rouge",
+    "Numero": "4568"
+  },
+  {
+    "Poids": 89,
+    "Marque": "NOUVEAU",
+    "Modele": "pInK",
+    "Numero": "uF45"
+  }
+]

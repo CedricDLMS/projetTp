@@ -11,4 +11,8 @@
     <ProjectReference Include="..\ClasseLib\ClasseLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
