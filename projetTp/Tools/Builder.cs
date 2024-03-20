@@ -35,7 +35,7 @@ namespace projetTp.Tools
 
             // Check si cMarque est vide ou non, recommence tant que vide care obligatoire
 
-            while (string.IsNullOrEmpty(cMarque) || string.IsNullOrWhiteSpace(cMarque) || cMarque.Any(char.IsDigit))
+            while (cMarque.stringCheckNotValid())
             {
                 Console.WriteLine("La marque ne peut pas etre vide, ou contenir de chiffre, renseignez à nouveau la marque");
                 cMarque = Console.ReadLine();
