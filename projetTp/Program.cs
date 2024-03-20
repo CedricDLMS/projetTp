@@ -19,7 +19,7 @@ listeVehicule.Add(new Camion("Camtar", 55,"OTU","4567"));
 Builder.ReadAll(listeVehicule);
 
 //Builder.SearchByNumero(listeVehicule);
-Builder.Delete(listeVehicule);
+Builder.DeleteMenu(listeVehicule);
 
 Builder.ReadAll(listeVehicule);
 

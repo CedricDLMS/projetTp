@@ -406,7 +406,7 @@ namespace projetTp.Tools
 		}
 
 		// Permet de supprimer en fonction de critères choisis
-		public static void Delete(List<Vehicule> liste)
+		public static void DeleteMenu(List<Vehicule> liste)
 		{
 			Console.WriteLine("Quelle Infos connaissez vous sur le véhicule à supprimer ?");
 			Console.WriteLine("1 : Marque , 2 : Numéro, 3 : Modèle, 4 : Puissance, 5 : Poids, 6 : Type(Camion ou Voiture)");
