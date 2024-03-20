@@ -510,6 +510,64 @@ namespace projetTp.Tools
             return listeNew.ToList();
         }
 
+        public static void SearchMenu(List<Vehicule> liste)
+        {
+            bool keyInvalid;
+            Console.WriteLine("Sur quel caractère chercher ?");
+            do
+            {
+                keyInvalid = false;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("1 : Marque, 2 : Modele, 3 : Numero, 4 : Puissance, 5 : Poids, 6 : Type");
+                Console.ResetColor();
+                var keyPressed = Console.ReadKey().Key;
+                Console.WriteLine();
+                keyInvalid = !(keyPressed == ConsoleKey.NumPad1 || keyPressed == ConsoleKey.D1
+                || keyPressed == ConsoleKey.NumPad2 || keyPressed == ConsoleKey.D2
+                || keyPressed == ConsoleKey.NumPad3 || keyPressed == ConsoleKey.D3
+                || keyPressed == ConsoleKey.NumPad4 || keyPressed == ConsoleKey.D4
+                || keyPressed == ConsoleKey.NumPad5 || keyPressed == ConsoleKey.D5
+                || keyPressed == ConsoleKey.NumPad6 || keyPressed == ConsoleKey.D6);
+                if (keyInvalid)
+                {
+                    Console.WriteLine("Touche non valide, veuillez réessayer.");
+                }
+                else
+                {
+                    // 1 : Marque
+                    if(keyPressed == ConsoleKey.NumPad1 || keyPressed == ConsoleKey.D1)
+                    {
+                        SearchByMarque(liste);
+                    }
+                    // 2 : Modele
+                    if(keyPressed == ConsoleKey.NumPad2 || keyPressed == ConsoleKey.D2)
+                    {
+                        SearchByModele(liste);
+                    }
+                    // 3 : Numéro
+                    if (keyPressed == ConsoleKey.NumPad3 || keyPressed == ConsoleKey.D3)
+                    {
+                        SearchByNumero(liste);
+                    }
+                    // 4 : Puissance
+                    if (keyPressed == ConsoleKey.NumPad4 || keyPressed == ConsoleKey.D4)
+                    {
+                        SearchByPuissance(liste);
+                    }
+                    // 5 : Poids
+                    if (keyPressed == ConsoleKey.NumPad5 || keyPressed == ConsoleKey.D5)
+                    {
+                        SearchByPoids(liste);
+                    }
+                    // 6 : Type
+                    if (keyPressed == ConsoleKey.NumPad6 || keyPressed == ConsoleKey.D6)
+                    {
+                        SearchByType(liste);
+                    }
+                }
+            }while(keyInvalid);
+        }
+
         // Permet de supprimer en fonction de critères choisis
         public static void DeleteMenu(List<Vehicule> liste)
         {
@@ -983,5 +1041,110 @@ namespace projetTp.Tools
             } while (keyInvalid);
         }
 
+        public static void originMenu(List<Vehicule> liste)
+        {
+            //Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("             BIENVENUE             ");
+            Console.WriteLine("-----------------------------------");
+            Console.ResetColor();
+
+            bool keyInvalid;
+            do
+            {
+                keyInvalid = false;
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("1 - Créer un Véhicule");
+                Console.WriteLine("2 - Voir un Véhicule");
+                Console.WriteLine("3 - Mettre à jour un Véhicule");
+                Console.WriteLine("4 - Supprimer un Véhicule");
+                Console.WriteLine("5 - Trier les Véhicules");
+                Console.WriteLine("6 - Filtrer les Véhicules ");
+                Console.WriteLine("7 - Voir tout les Véhicules ");
+                Console.WriteLine("8 - Sauvegarder les véhicules");
+                Console.ResetColor();
+                var keyPressed = Console.ReadKey().Key;
+                Console.WriteLine();
+                keyInvalid = !(keyPressed == ConsoleKey.NumPad1 || keyPressed == ConsoleKey.D1
+                || keyPressed == ConsoleKey.NumPad2 || keyPressed == ConsoleKey.D2
+                || keyPressed == ConsoleKey.NumPad3 || keyPressed == ConsoleKey.D3
+                || keyPressed == ConsoleKey.NumPad4 || keyPressed == ConsoleKey.D4
+                || keyPressed == ConsoleKey.NumPad5 || keyPressed == ConsoleKey.D5
+                || keyPressed == ConsoleKey.NumPad6 || keyPressed == ConsoleKey.D6
+                || keyPressed == ConsoleKey.NumPad7 || keyPressed == ConsoleKey.D7
+                || keyPressed == ConsoleKey.NumPad8 || keyPressed == ConsoleKey.D8);
+                if (keyInvalid)
+                {
+                    Console.WriteLine("Touche non valide, veuillez réessayer.");
+                }
+                else
+                {
+                    // --------- 1 Creation ----------
+                    if(keyPressed == ConsoleKey.NumPad1 || keyPressed == ConsoleKey.D1)
+                    {
+                        Console.WriteLine("Voulez vous créer une 1 : voiture ou un 2 : Camion ?");
+                        bool choixInvalid;
+                        do
+                        {
+                            choixInvalid = false;
+                            var choixKey = Console.ReadKey().Key;
+                            Console.WriteLine();
+                            choixInvalid = !(choixKey == ConsoleKey.NumPad1 || choixKey == ConsoleKey.D1
+                            || choixKey == ConsoleKey.NumPad2 || choixKey == ConsoleKey.D2);
+                            if (choixInvalid)
+                            {
+                                Console.WriteLine("Choix invalide , recommencez");
+                            }
+                            else
+                            {
+                                // 1 : Voiture
+                                if(choixKey == ConsoleKey.NumPad1 || choixKey == ConsoleKey.D1)
+                                {
+                                    VoitureCreator(liste);
+                                }
+                                // 2 : Camion
+                                if (choixKey == ConsoleKey.NumPad2 || choixKey == ConsoleKey.D2)
+                                {
+                                    CamionCreator(liste);
+                                }
+                            }
+                        }while(choixInvalid);
+                    }
+                    // --------- 2 : Voir Vehicule ---
+                    if (keyPressed == ConsoleKey.NumPad2 || keyPressed == ConsoleKey.D2)
+                    {
+                        SearchMenu(liste);
+                    }
+                    // -------- 3 : Update -----------
+                    if (keyPressed == ConsoleKey.NumPad3 || keyPressed == ConsoleKey.D3)
+                    {
+                        UpdateVehicule(liste);
+                    }
+                    // -- 4 : Supprimer un Véhicule --
+                    if (keyPressed == ConsoleKey.NumPad4 || keyPressed == ConsoleKey.D4)
+                    {
+                        DeleteMenu(liste);
+                    }
+                    // --------- 5 : Tri -------------
+                    if (keyPressed == ConsoleKey.NumPad5 || keyPressed == ConsoleKey.D5)
+                    {
+                        TriMenu(liste);
+                    }
+                    // -------- 6 : Filtrer ----------
+                    if (keyPressed == ConsoleKey.NumPad6 || keyPressed == ConsoleKey.D6)
+                    {
+                        SearchMenu(liste);
+                    }
+                    // ------- 7 : Voir tout ---------
+                    if (keyPressed == ConsoleKey.NumPad7 || keyPressed == ConsoleKey.D7)
+                    {
+                        ReadAll(liste);
+                    }
+                    // ------ 8 : Sauvegarder -------
+                }
+
+            } while (keyInvalid);
+        }
     }
-}
+    }
