@@ -217,7 +217,7 @@ namespace projetTp.Tools
 				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine("Aucun Résultat correspondant. ");
 				Console.ResetColor();
-				SearchByMarque(liste);
+				listeMarque = SearchByMarque(liste); // Change listeMarque dans le cas ou des erreurs sont commises
 			}
 			// Retourne la liste pour etre utilisé ailleur :DDDDD
 			return listeMarque.ToList();
@@ -250,7 +250,7 @@ namespace projetTp.Tools
 				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine("Aucun Résultat correspondant. ");
 				Console.ResetColor();
-				SearchByModele(liste);
+				listeModele = SearchByModele(liste); // Change listeModele dans le cas ou des erreurs sont commises
 			}
 			// Retourne la liste pour etre utilisé ailleur :DDDDD
 			return listeModele.ToList();
@@ -283,7 +283,7 @@ namespace projetTp.Tools
 				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine("Aucun Résultat correspondant. ");
 				Console.ResetColor();
-				SearchByNumero(liste);
+				listeNumero = SearchByNumero(liste); //Change listeNumero dans le cas ou des erreurs sont commises
 			}
 			// Retourne la liste pour etre utilisé ailleur :DDDDD
 			return listeNumero.ToList();
@@ -301,7 +301,7 @@ namespace projetTp.Tools
 
 			// Applique le filtre en fonction de la Puissance 
 
-			var listePuissance = liste.OfType<Voiture>().Where(v => v.Puissance == Puissance); // Creation d'une liste Temporaire
+			var listePuissance = liste.OfType<Voiture>().Where(v => v.Puissance == Puissance).ToList<Vehicule>(); // Creation d'une liste Temporaire
 			Console.WriteLine("Voici votre résultat : ");
 			int i = 0;
 			// Affiche tout les items avec ce nom de marque
@@ -321,7 +321,7 @@ namespace projetTp.Tools
 				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine("Aucun Résultat correspondant. ");
 				Console.ResetColor();
-				SearchByPuissance(liste);
+				listePuissance = SearchByPuissance(liste);
 			}
 			// Retourne la liste pour etre utilisé ailleur :DDDDD
 			return listePuissance.ToList<Vehicule>();
@@ -339,7 +339,7 @@ namespace projetTp.Tools
 
 			// Applique le filtre en fonction de la Puissance 
 
-			var listePoids = liste.OfType<Camion>().Where(v => v.Poids == Poids); // Creation d'une liste Temporaire
+			var listePoids = liste.OfType<Camion>().Where(v => v.Poids == Poids).ToList<Vehicule>(); // Creation d'une liste Temporaire
 			Console.WriteLine("Voici votre résultat : ");
 			int i = 0;
 			// Affiche tout les items avec ce nom de marque
@@ -358,7 +358,7 @@ namespace projetTp.Tools
 				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine("Aucun Résultat correspondant. ");
 				Console.ResetColor();
-				SearchByPoids(liste);
+				listePoids = SearchByPoids(liste);
 			}
 			// Retourne la liste pour etre utilisé ailleur :DDDDD
 			return listePoids.ToList<Vehicule>();
