@@ -34,7 +34,7 @@
 
         public override string ToString()
         {
-            return $"Marque : {Marque}  Modele : {Modele} Numero: {Numero} ";
+            return $"Marque : {Marque.PadRight(15)}  Modele : {Modele.PadRight(15)} Numero: {Numero.PadRight(6)} ";
         }
     }
     public class Camion : Vehicule
@@ -64,7 +64,7 @@
 
         public override string ToString()
         {
-            return " CAMION | " + base.ToString()+ $" Poids : {Poids}";
+            return " CAMION | " + base.ToString()+ $" Poids : {Poids}".PadRight(2);
         }
     }
     public class Voiture : Vehicule
